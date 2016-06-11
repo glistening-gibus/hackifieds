@@ -1,7 +1,6 @@
 const FilterView = (props) => {
 
   const handleFilterSubmit = function(e) {
-    console.log('etarget: ', document.getElementById("searchInput").value);
     const target = e.target.name
     let data;
     if (target === 'Distance') {
@@ -11,10 +10,8 @@ const FilterView = (props) => {
     } else if (target === 'RoomType') {
       data = ['roomtype', e.target.value];
     } else if (document.getElementById("searchInput")) {
-      console.log('making it')
       data = ['description', document.getElementById("searchInput").value];
     }
-    console.log('filterdata', data);
     props.handleClick(data);
   }
 
@@ -88,9 +85,6 @@ const FilterView = (props) => {
       </form>
     );
   }
-
-
-
 };
 
 export default FilterView;
