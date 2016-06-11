@@ -27,13 +27,14 @@ class Parent extends React.Component {
   render() {
     let loginButton;
     let welcomeMsg;
+    let postButton;
     if(Object.keys(this.state.currentUser).length === 0) {
       loginButton = <Button href="/auth/github">Login with GitHub</Button>;
     } else {
       loginButton = <Button href="/api/logout">Logout</Button>;
       welcomeMsg = <span>Welcome {this.state.currentUser.firstName}!</span>;
+      postButton = <Button><Link to="post">Post</Link></Button>;
     }
-
     return (
       <Grid>
         <PageHeader>
@@ -44,7 +45,7 @@ class Parent extends React.Component {
             <Button><Link to={{ pathname: '/', query: { type: 'rent' } }}>Rent</Link></Button>
             <Button><Link to={{ pathname: '/', query: { type: 'buy' } }}>Buy</Link></Button>
             <Button><Link to={{ pathname: '/', query: { type: 'hack' } }}>Hack</Link></Button>
-            <Button><Link to="post">Post</Link></Button>
+            {postButton}
           </ButtonGroup>
         </PageHeader>
         <Grid>

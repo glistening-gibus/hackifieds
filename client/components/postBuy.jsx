@@ -97,6 +97,7 @@ const PostBuy = (props) => {
             name="images"
             onChange={ e => setUploadImage(e.target.files) } />
         </FormGroup>
+        
         <Button type="submit" onClick={ submitHandler }>Submit</Button>
       </form>
     </Grid>
