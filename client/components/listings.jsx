@@ -12,9 +12,9 @@ const Listings = (props) => {
   //Return the filtered population only & show a specific listing's info if it has been clicked
   return (
     <div>
-      {filtered.map(listing => 
-        (props.activeListing && props.activeListing === listing.listingId) ? 
-        <ListingInfo handleListingInfoClick = {props.handleListingInfoClick} listing={listing} user={props.user}/> : 
+      {filtered.map(listing =>
+        (props.activeListing && props.activeListing === listing.listingId) ?
+        <ListingInfo handleListingInfoClick = {props.handleListingInfoClick} listing={listing} user={props.user}/> :
         <ListingEntry key={listing.listingId} handleListingEntryClick={props.handleListingEntryClick} listing={listing} profilePic={props.profilePic} housePic={props.housePic}/>)
       }
     </div>

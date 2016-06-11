@@ -1,4 +1,4 @@
-import RentFilterView from './filterView.jsx';
+import FilterView from './filterView.jsx';
 import ListEntryView from './listEntryView.jsx';
 import DirectionView from './directionView.jsx';
 import helpers from '../lib/helpers.js';
@@ -52,7 +52,7 @@ class ListingView extends React.Component {
     return (
       <Row>
         <Col md={3}>
-          <RentFilterView page={this.state.page} handleClick={this.handleFilterItemClick.bind(this)} />
+          <FilterView page={this.state.page} handleClick={this.handleFilterItemClick.bind(this)} />
         </Col>
         <Col md={9}>
         <DirectionView location={this.state.locationForMap} />
