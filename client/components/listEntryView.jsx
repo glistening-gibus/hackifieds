@@ -18,8 +18,11 @@ const ListEntryView = (props) => {
     // console.log('Event', event.target.commentText.value);
     commentInfo.text = event.target.commentText.value
     
+    console.log(event);
+
+
     helper.postComment(commentInfo, function() {
-      // reload?
+      //
       props.refresh();
     });
   };
@@ -70,6 +73,22 @@ const ListEntryView = (props) => {
       </div>    
   }
 
+  let commentComp;
+  let commentLogIn;
+  if(Object.keys(props.currentUser).length === 0) {
+    commentComp = (<div></div>);
+    commentLogIn = (
+      <div>(Log in to see comments)</div>
+    );
+  } else {
+    commentComp = (
+      <Row>
+        <CommentComponent comments={Comments} commentId='top' id={listingId} addCommentHandler={addComment.bind(this)}/>
+      </Row>
+    );
+    commentLogIn = (<div></div>);
+  }
+
   return (
     <div>
       <Panel>
@@ -92,11 +111,9 @@ const ListEntryView = (props) => {
           </Col>
         </Row>
         <Row>
-        &nbsp;Comments:
+        &nbsp;Comments:{commentLogIn}
         </Row>
-        <Row>
-        <CommentComponent comments={Comments} commentId='top' id={listingId} addCommentHandler={addComment.bind(this)}/>
-        </Row>
+        {commentComp}
       </Panel>
     </div>
   );
