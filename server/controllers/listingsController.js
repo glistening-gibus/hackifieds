@@ -39,6 +39,7 @@ exports.getAll = function(category, callback) {
 // Controller method - get filtered results
 exports.getFiltered = function(filters, callback) {
   // constructing where object body
+  console.log(filters.description);
   let filteredWhere = {};
   if (Object.keys(filters).length <= 1) {
     filteredWhere = {};
@@ -69,6 +70,15 @@ exports.getFiltered = function(filters, callback) {
       filteredWhere.roomtype = filters.roomtype;
     } else {
       delete filteredWhere.roomtype;
+    }
+
+    if (filters.description !== undefined) {
+      description = {$like: '%' + filters.description + '%'};
+      filteredWhere.description = description;
+      console.log('not undefined');
+    } else {
+      console.log('undefined');
+      delete filteredWhere.description;
     }
 
   }
