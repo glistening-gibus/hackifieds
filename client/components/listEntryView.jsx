@@ -1,14 +1,34 @@
 import { Row, Col, Jumbotron, Panel, Button } from 'react-bootstrap';
 import helper from '../lib/helpers';
+import CommentComponent from './comments.jsx';
+
 
 const ListEntryView = (props) => {
-  const { contactNum, title, User, Images, description, price, location, roomtype, distance, createdAt } = props.listing;
+  const { contactNum, title, User, Images, description, price, location, roomtype, distance, createdAt, Comments, listingId } = props.listing;
   const dollarPrice = price ? '$' + price : '';
 
   const handleClick = (e) => {
     e.preventDefault();
     props.show(location);
   }
+  const addComment = (commentInfo, event) => {
+    event.preventDefault();
+
+    // console.log('commentInfo', commentInfo);
+    // console.log('Event', event.target.commentText.value);
+    commentInfo.text = event.target.commentText.value
+    
+    console.log(event);
+
+
+    helper.postComment(commentInfo, function() {
+      //
+      props.refresh();
+    });
+  };
+
+
+  //console.log(JSON.stringify(props.listing))
 
   let image;
   if(Images.length > 0) {
@@ -53,6 +73,22 @@ const ListEntryView = (props) => {
       </div>    
   }
 
+  let commentComp;
+  let commentLogIn;
+  if(Object.keys(props.currentUser).length === 0) {
+    commentComp = (<div></div>);
+    commentLogIn = (
+      <div>(Log in to see comments)</div>
+    );
+  } else {
+    commentComp = (
+      <Row>
+        <CommentComponent comments={Comments} commentId='top' id={listingId} addCommentHandler={addComment.bind(this)}/>
+      </Row>
+    );
+    commentLogIn = (<div></div>);
+  }
+
   return (
     <div>
       <Panel>
@@ -75,7 +111,9 @@ const ListEntryView = (props) => {
           </Col>
         </Row>
         <Row>
+        &nbsp;Comments:{commentLogIn}
         </Row>
+        {commentComp}
       </Panel>
     </div>
   );
